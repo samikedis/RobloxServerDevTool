@@ -1,24 +1,15 @@
-import discord
+'''
+    Roblox developer tool for roblox server management and statistics 
+'''
+from flask import Flask
 
-TOKEN = 'NTQwNjY4MDkwNDUxNDkyODY0.DzUQZw.Mq79BApvyQ8J7IeTHWL7jGycsYg'
+_version = "0.00.01"
 
-client = discord.Client()
+app = Flask(__name__)
 
-@client.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-       return
+@app.route("/")
+def main():
+    return "Currently running version {_version} of Rbx Server Tool & Analytics"
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-
-client.run('NTQwNjY4MDkwNDUxNDkyODY0.DzUQZw.Mq79BApvyQ8J7IeTHWL7jGycsYg')
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
